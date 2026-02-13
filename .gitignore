@@ -1,0 +1,6 @@
+.vscode/
+.DS_Store
+Thumbs.db
+public/uploads/*
+!public/uploads/.gitkeep
+app/config/config.php

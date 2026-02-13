@@ -1,0 +1,39 @@
+CREATE DATABASE IF NOT EXISTS twitchplanner CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE twitchplanner;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(190) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  twitch_url VARCHAR(255) NULL,
+  logo_path VARCHAR(255) NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE plannings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  title VARCHAR(120) NOT NULL,
+  week_start DATE NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT fk_plannings_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE events (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  planning_id INT NOT NULL,
+  game_name VARCHAR(120) NOT NULL,
+  game_image_url VARCHAR(255) NULL,
+  stream_title VARCHAR(160) NULL,
+  day_of_week TINYINT NOT NULL,
+  start_time TIME NOT NULL,
+  end_time TIME NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT fk_events_planning FOREIGN KEY (planning_id) REFERENCES plannings(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE INDEX idx_plannings_user ON plannings(user_id);
+CREATE INDEX idx_events_planning_day ON events(planning_id, day_of_week);

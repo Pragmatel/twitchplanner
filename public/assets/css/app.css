@@ -1,0 +1,14 @@
+:root{--tp-purple:#9146ff}
+a{color:var(--tp-purple)}
+.btn-primary{background:var(--tp-purple);border-color:var(--tp-purple)}
+.btn-primary:hover{opacity:.9}
+.card{background:#0f0f13;border-color:#2a2a35}
+.form-control,.form-select{background:#111118;color:#f1f1f1;border-color:#2a2a35}
+.form-control:focus,.form-select:focus{border-color:var(--tp-purple);box-shadow:0 0 0 .25rem rgba(145,70,255,.25)}
+.table{--bs-table-bg:transparent}
+.badge-tp{background:rgba(145,70,255,.15);color:#d9c7ff;border:1px solid rgba(145,70,255,.35)}
+.planning-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+.day-col{border:1px solid #2a2a35;border-radius:10px;padding:10px;min-height:240px;background:#0b0b10}
+.event-card{border:1px solid #2a2a35;border-radius:10px;padding:10px;margin-bottom:10px;background:#0f0f13}
+.event-img{width:100%;height:110px;object-fit:cover;border-radius:8px;border:1px solid #2a2a35}
+.small-muted{color:#b8b8c9;font-size:.9rem}
